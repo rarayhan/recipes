@@ -27,3 +27,12 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+def search_recipes(request):
+    query = request.GET.get('query')
+    recipes = Recipe.objects.filter(title__icontains=query)
+    return render(request, 'search.html', {'recipes': recipes})
+def save_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(pk=recipe_id)
+    request.user.userprofile.favorite_recipes.add(recipe)
+    return redirect('recipe_details', recipe_id=recipe_id)
+
