@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Search Recipes</h1>
+        <form method="get" action="{% url 'search_recipes' %}">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                {{ search_form.query|as_bootstrap_input(class="form-control") }}
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Display search results -->
+        <h2>Search Results:</h2>
+        <ul class="list-group">
+            {% for recipe in recipes %}
+                <li class="list-group-item">
+                    <a href="{% url 'recipe_details' recipe_id=recipe.id %}">{{ recipe.title }}</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No recipes found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
