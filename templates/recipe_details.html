@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ recipe.title }}</h1>
+        <p>{{ recipe.ingredients }}</p>
+        <p>{{ recipe.instructions }}</p>
+        <p>Cuisine: {{ recipe.cuisine }}</p>
+
+        <!-- Social sharing buttons -->
+        <div class="btn-group">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-primary" target="_blank">
+                Share on Facebook
+            </a>
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ recipe.title }}" class="btn btn-info" target="_blank">
+                Share on Twitter
+            </a>
+        </div>
+    </div>
+{% endblock %}
